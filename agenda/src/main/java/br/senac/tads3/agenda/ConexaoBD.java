@@ -23,7 +23,7 @@ public class ConexaoBD {
     
     // Passo 2: Abrir a conexão
     conn = DriverManager.getConnection(
-	    "jdbc:derby://localhost:1527/agendabd;SecurityMechanism=3",
+	    "jdbc:derby://localhost:1527/agendadb;SecurityMechanism=3",
 	    "app", // usuário BD
 	    "app"); // senha BD
     return conn;
