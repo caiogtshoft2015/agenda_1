@@ -24,11 +24,12 @@ public class Agenda extends ConexaoBD {
 
     private static Scanner entrada = new Scanner(System.in);
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws SQLException {
+        
         ContatoDAO add = new ContatoDAO();
+        
 
-
+        Agenda instancia = new Agenda();
 
         do {
             System.out.println("***** DIGITE UMA OPÇÃO *****");
@@ -41,10 +42,12 @@ public class Agenda extends ConexaoBD {
             int opcao = Integer.parseInt(strOpcao);
             switch (opcao) {
                 case 1:
+                    
+                    
                     break;
                 case 2:
-                    add.cadastrar();
-
+                    add.incluir();
+                    
                     break;
                 case 9:
                     System.exit(0);
