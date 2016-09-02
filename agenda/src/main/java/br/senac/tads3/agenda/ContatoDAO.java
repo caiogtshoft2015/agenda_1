@@ -99,10 +99,11 @@ public class ContatoDAO extends ConexaoBD {
     public void altera(Contato contato) {
 
         Connection con = new ConnectionFactory().getConnection();
+        System.out.println("Insira o nome a ser alterado");
         String nome = entrada.nextLine();
 
 
-
+        System.out.println("Insira o ID do registro no banco de dados");
         int id = entrada.nextInt();
 
 
@@ -148,6 +149,8 @@ public class ContatoDAO extends ConexaoBD {
 
     public void remove(Contato contato) {
         Connection con = new ConnectionFactory().getConnection();
+        
+        System.out.println("Insira o ID do registro no banco de dados");
         int id = entrada.nextInt();
 
 
