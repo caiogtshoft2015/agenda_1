@@ -24,10 +24,14 @@ public class Agenda extends ConexaoBD {
 
     private static Scanner entrada = new Scanner(System.in);
 
-    public static void main(String[] args) throws SQLException {
-        
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
         ContatoDAO add = new ContatoDAO();
-        
+        Contato add1 = new Contato("", "", "", "");
+
+
+
+
 
         Agenda instancia = new Agenda();
 
@@ -35,6 +39,8 @@ public class Agenda extends ConexaoBD {
             System.out.println("***** DIGITE UMA OPÇÃO *****");
             System.out.println("(1) Listar contatos");
             System.out.println("(2) Incluir novo contato");
+            System.out.println("(3) Deleta contato");
+            System.out.println("(4) Altera contato");
             System.out.println("(9) Sair");
             System.out.print("Opção: ");
 
@@ -42,12 +48,25 @@ public class Agenda extends ConexaoBD {
             int opcao = Integer.parseInt(strOpcao);
             switch (opcao) {
                 case 1:
-                    
-                    
+
+                    add.consultaContato();
+
                     break;
                 case 2:
                     add.incluir();
-                    
+
+                    break;
+                case 3:
+                    add.remove(add1);
+
+
+                    break;
+                case 4:
+                    add.altera(add1);
+
+
+
+
                     break;
                 case 9:
                     System.exit(0);

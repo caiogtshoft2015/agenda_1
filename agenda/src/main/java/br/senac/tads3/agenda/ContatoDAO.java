@@ -21,6 +21,8 @@ public class ContatoDAO extends ConexaoBD {
     static Scanner entrada = new Scanner(System.in);
     Contato add = new Contato("a", "a", "a", "a");
     private String String;
+    private static ResultSet rs;
+    private static Statement stmt;
 
     public void incluir() {
 
@@ -94,30 +96,71 @@ public class ContatoDAO extends ConexaoBD {
         }
     }
 
-    public void alterar() throws SQLException, ClassNotFoundException {
+    public void altera(Contato contato) {
 
-        PreparedStatement stmt;
-        Connection conn = null;
-        String consulta = entrada.nextLine();
+        Connection con = new ConnectionFactory().getConnection();
+        String nome = entrada.nextLine();
 
 
-        conn = obterConexao();
+
+        int id = entrada.nextInt();
+
+
+
+
+
+        String sql = "update TB_CONTATO set NM_CONTATO=? where ID_CONTATO=?";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
+
+            stmt.setInt(2, id);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void consultaContato() throws SQLException, ClassNotFoundException {
+        // pega a conexão e o Statement
+
+        Connection con = new ConnectionFactory().getConnection();
+
+        PreparedStatement stmt = con.prepareStatement("select * from TB_CONTATO");
+
+// executa um select
+        ResultSet rs = stmt.executeQuery();
+
+
+// itera no ResultSet
+        while (rs.next()) {
+
+            System.out.println(rs.getString("NM_CONTATO"));
+
+        }
+
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
+    public void remove(Contato contato) {
+        Connection con = new ConnectionFactory().getConnection();
+        int id = entrada.nextInt();
+
 
 
 
         try {
-            // cria um preparedStatement
-            stmt = conn.prepareStatement("select * from TB_CONTATO (NM_CONTATO) values (?)");
-            // preenche os valores
-            stmt.setString(1, consulta);
-
-            // executa
+            PreparedStatement stmt = con.prepareStatement(
+                    "delete from TB_CONTATO where ID_CONTATO=?");
+            stmt.setLong(1, id);
             stmt.execute();
             stmt.close();
-            System.out.println("Gravado!");
-            conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
